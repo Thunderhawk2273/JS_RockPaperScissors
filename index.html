@@ -1,0 +1,103 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+// Initialize and define global variables
+        let playerScore = 0;
+        let computerScore = 0;
+        let gameLength = 5;
+
+// Return random selection for computer choice
+    function computerPlay(){
+        let x = Math.floor(Math.random()*3);
+        switch (x){
+            case 0:
+                return("rock");
+            case 1:
+                return("paper");
+            case 2:
+                return("scissors");
+        }
+        return "rock";
+    }
+
+// Prompt player for selection; read first letter incase of mispelling; default is "rock"
+    function playerSelection(){
+        let input = new String(prompt("Rock (r), Paper (p), or Scissors(s)? \n(if nothing, default response is \"rock\"\)"));
+
+        if(input.charAt(0) == 'r' || input.charAt(0) == 'r')
+            return("rock");
+        else if(input.charAt(0) == 'p'|| input.charAt(0) == 'P')
+            return("paper");
+        else if(input.charAt(0) == 's' || input.charAt(0) == 'S')
+            return("scissors");
+        else    
+            return("rock");
+    }
+
+// See who wins this round; if statement is for tie, switch is for everything else
+    function playRound(playerSelection, computerSelection){
+        if(playerSelection == computerSelection){
+            return("There has been a tie!");
+        }
+
+        switch(playerSelection){
+            case "rock":
+                if(computerSelection == "paper"){
+                    computerScore++;
+                    return("You chose rock and the Computer chose paper: the Computer won this round!");
+                }
+                if(computerSelection == "scissors"){
+                    playerScore++;
+                    return("You chose rock and the Computer chose scissors: You won this round!");
+                }
+            
+            case "paper":
+                if(computerSelection == "scissors"){
+                    computerScore++;
+                    return("You chose paper and the Computer chose scissors: the Computer won this round!");
+                }
+                if(computerSelection == "rock"){
+                    playerScore++;
+                    return("You chose paper and the Computer chose rock: You won this round!");
+                }
+            
+            case "scissors":
+                if(computerSelection == "rock"){
+                    computerScore++;
+                    return("You chose scissors and the Computer chose rock: the Computer won this round!");
+                }
+                if(computerSelection == "paper"){
+                    playerScore++;
+                    return("You chose scissors and the Computer chose paper: You won this round!");
+                }
+
+            default: return("Something went wrong!");
+        }
+    }
+
+
+// Run the game for 5 rounds; if there is a tie by the games end, continue the game
+function game(){
+    for(let x = 0; x < gameLength; x++){
+        console.log("Round " + x + ": " + playRound(playerSelection(), computerPlay()));
+        console.log("Player Score: " + playerScore + "    Computer Score: " + computerScore);
+
+        if(x >= gameLength-1 && playerScore == computerScore)
+            gameLength++;
+    }
+    (playerScore > computerScore) ? console.log("Player wins this game!") : console.log("Computer wins this game!");
+}
+
+// Run the game
+    game();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
